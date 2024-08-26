@@ -29,10 +29,21 @@ main_line.addLayout(col_1)
 main_line.addLayout(col_2)
 win.setLayout(main_line)
 
+def filter(files,extensions):
+    result = []
+    for file in files:
+        for extension in extensions:
+            if file.endswith(extension):
+                result.append(file)
+    return result
 def show_file_names_list():
     workdir = QFileDialog.getExistingDirectory()
     files = os.listdir(workdir)
-    print(files)
+    extensions = ['.jpg','.jpeg','.png','.gif','.bmp']
+    filenames = filter(files,extensions)
+    listFiles.clear()
+    for file in filenames:
+        listFiles.addItem(file)
 
 btn_dir.clicked.connect(show_file_names_list)
 win.show()
